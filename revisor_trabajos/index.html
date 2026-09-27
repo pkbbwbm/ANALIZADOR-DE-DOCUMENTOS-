@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Revisor Académico</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.4.168/pdf.min.mjs" type="module"></script>
+  <script src="https://unpkg.com/mammoth@1.8.0/mammoth.browser.min.js"></script>
+</head>
+<body>
+  <main class="container">
+    <header>
+      <div class="badge">✍️ REVISOR ACADÉMICO</div>
+      <h1>Revisa la naturalidad de tu trabajo</h1>
+      <p class="subtitle">Sube un PDF, DOCX o TXT y obtén observaciones para mejorar tu escritura con tus propias ideas y palabras.</p>
+    </header>
+
+    <section id="uploadView" class="card">
+      <label class="dropzone" id="dropzone" for="fileInput">
+        <div class="upload-icon">📎</div>
+        <h2>Selecciona tu documento</h2>
+        <p>Toca aquí para elegir un archivo desde tu teléfono o computador.</p>
+        <span class="formats">PDF · DOCX · TXT · Máx. 15 MB</span>
+        <input id="fileInput" type="file" accept=".pdf,.docx,.txt,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain">
+      </label>
+      <p class="privacy">🔒 El análisis se realiza en este navegador. El proyecto no sube tu documento a un servidor.</p>
+    </section>
+
+    <section id="loadingView" class="card hidden">
+      <div class="loader"></div>
+      <h2>Analizando tu documento...</h2>
+      <p id="progressText">Preparando el análisis</p>
+      <div class="progress"><div id="progressBar"></div></div>
+      <ul class="steps">
+        <li id="s1">○ Extrayendo texto</li>
+        <li id="s2">○ Analizando estructura</li>
+        <li id="s3">○ Revisando repeticiones</li>
+        <li id="s4">○ Generando recomendaciones</li>
+      </ul>
+    </section>
+
+    <section id="resultView" class="hidden">
+      <div class="card result-head">
+        <button class="back" id="newFileBtn">← Analizar otro archivo</button>
+        <p class="file-name" id="fileName"></p>
+        <h2>Resultado del análisis</h2>
+        <div class="score-ring"><span id="score">0</span><small>/100</small></div>
+        <h3 id="scoreLabel">Naturalidad de escritura</h3>
+        <p id="summary"></p>
+      </div>
+
+      <div class="grid">
+        <div class="card stat"><b id="sentences">0</b><span>Oraciones</span></div>
+        <div class="card stat"><b id="paragraphs">0</b><span>Párrafos</span></div>
+        <div class="card stat"><b id="repeated">0</b><span>Repeticiones detectadas</span></div>
+        <div class="card stat"><b id="generic">0</b><span>Frases para revisar</span></div>
+      </div>
+
+      <div class="card">
+        <h2>💡 Recomendaciones</h2>
+        <div id="recommendations"></div>
+      </div>
+
+      <div class="card">
+        <h2>🔎 Fragmentos para revisar</h2>
+        <p class="muted">Estas observaciones no indican que una persona o una herramienta haya escrito el texto. Son señales lingüísticas que pueden ayudarte a revisar tu trabajo.</p>
+        <div id="fragments"></div>
+      </div>
+
+      <div class="card disclaimer">
+        <strong>Importante:</strong> este resultado es un indicador de estilo y naturalidad, no una medición científica del porcentaje de texto generado por IA ni un detector oficial de ninguna institución.
+      </div>
+    </section>
+  </main>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
